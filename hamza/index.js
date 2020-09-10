@@ -1,10 +1,18 @@
 const express = require("express");
 const hbs = require("express-handlebars");
 const path = require("path");
-const getWeather = require("./lib/getWeather.js");
 const app = express();
+const bodyParser = require("body-parser");
+
+const indexRouter = require("./routes/indexRouter.js");
+const weatherRouter = require("./routes/weatherRouter.js");
+const errRouter = require("./routes/errRouter.js");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(__dirname, "public")));
+
 app.engine(
   "hbs",
   hbs({
@@ -18,20 +26,9 @@ app.engine(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", ".hbs");
 
-app.get("/", async (req, res) => {
-  let data = await getWeather();
-  let name = data.name;
-  let description = data.weather[0].description;
-  let temp = data.main.temp;
-  let feels_like = data.main.feels_like;
-  res.render("index", { name, temp, data: { description, feels_like } });
-});
-app.get("/weather", (req, res) => {
-  res.render("weather");
-});
-app.get("*", (req, res) => {
-  res.render("404");
-});
+app.use("/", indexRouter);
+app.use("/weather", weatherRouter);
+app.use("*", errRouter);
 
 app.listen(3000, () => {
   console.log("listening to port 3000");
