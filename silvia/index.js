@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const indexRouter = require('./routes/indexRouter');
 const weatherRouter = require('./routes/weatherRouter');
 const errRouter = require('./routes/errRouter');
-const homeRouter = require('./routes/homeRouter');
 
 const app = express();
 
@@ -27,7 +26,6 @@ app.set('view engine', '.hbs');
 app.use('/', indexRouter);
 app.use('/weather', weatherRouter);
 app.use('*', errRouter);
-app.use('/', homeRouter);
 
 app.listen(3000, () => {
     console.log('Listening on port 3000');
