@@ -1,5 +1,15 @@
-// const fetch = require('node-fetch');
-// require('dotenv').config();
+const fetch = require('node-fetch');
+require('dotenv').config();
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res)=>{
+      res.send("Ola Terra")
+});
+
+app.listen(3000, () => {
+  console.log("Listening on port 3000")
+});
 
 // const url = `http://api.openweathermap.org/data/2.5/weather?q=${location},uk&units=metric&appid=${process.env.APPID}`;
 
@@ -12,7 +22,8 @@
 
 // getWeather();
 
-
+//Web Spec Lang
+/*
 const api = {
     key: "392182ebc11414a007fcda8aa334ec6f",
     base: "https://api.openweathermap.org/data/2.5/"
@@ -63,3 +74,4 @@ const api = {
   
     return `${day} ${date} ${month} ${year}`;
   }
+  */
