@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const indexRouter = require('./routes/indexRouter');
 const errRouter = require('./routes/errRouter');
-
+const weatherRouter = require('./routes/weatherRouter');
 
 const app = express();
 
